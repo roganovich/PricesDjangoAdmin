@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib import admin
 
 class Supplier(models.Model):
     """
@@ -24,7 +25,7 @@ class Supplier(models.Model):
     ]
 
     FILE_DELIMETERS = [
-        ('\t', 'Табуляция'),
+        ('\\t', 'Табуляция'),
         (';', 'Точка с запятой'),
         (',', 'Запятая'),
     ]
@@ -54,3 +55,8 @@ class Supplier(models.Model):
         Returns the url to access a particular book instance.
         """
         return reverse('supplier-detail', args=[str(self.id)])
+
+# Define the admin class
+class SupplierAdmin(admin.ModelAdmin):
+
+    list_display  = ('name', 'email_addres', 'email_title', 'suppliers_id', 'warhouse_id', 'parser_type')
